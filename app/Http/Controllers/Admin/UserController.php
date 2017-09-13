@@ -25,7 +25,7 @@ class UserController extends Controller
         $sortType = empty($request->sort) ? '' : $request->sort;
         $sort = (strtolower($sortType) == 'desc') ? 'asc' : 'desc';
 
-        $fields    = array('user_id', 'username', 'status', 'product_time_created', 'product_time_updated');
+        $fields    = array('user_id', 'username', 'status', 'user_time_created', 'user_time_updated');
 
         foreach($fields as $field){
             $path[] = !empty($request->search) ? '?search=' . $request->search . '&field=' . $field . '&sort=' . $sort : '?field=' . $field . '&sort=' . $sort;
@@ -102,15 +102,31 @@ class UserController extends Controller
     {
         if(!$this->userRepo->checkId($request->id)){
 
+            if(!$this->userRepo->checkEmail($request->email)) {
+
+                return redirect()->route('admin.user.postEdit', $request->id)->withErrors(['email' => 'Email đã được đăng ký'])->withInput();
+
+            }
+
+            $img = $request->user_img;
+            $fileName = $img->getClientOriginalName();
+            $img->move('upload/user', $fileName);
+
             $arrayData  = array('username' => trim($request->username),
                 'pass' => (!empty($request->pass)) ? md5($request->pass) : '',
                 'status' => $request->status,
+                'user_img'  => $fileName,
                 'user_email' => $request->email,
                 'user_time_updated' => date('Y-m-d h:i:s'),
             );
 
             if($this->userRepo->update($request->id, $arrayData)){
+                if($request->id == $request->session()->get('user_id')){
+                    $request->session()->flush();
+                    return redirect()->route('admin.getLogin')->withErrors(['username' => 'Dữ liệu đã đổi thành công vui lòng đăng nhập lại']);
+                }
                 return redirect()->route('admin.user.index')->with(['message' => 'Đã thêm thành công']);
+
             }
 
             return redirect()->route('admin.user.index')->with(['message' => 'Đã xảy ra lỗi khi sửa dữ liệu !']);
