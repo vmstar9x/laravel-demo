@@ -135,10 +135,13 @@ class UserController extends Controller
         return redirect()->route('admin.user.index')->with(['message' => 'Không tồn tại username này']);
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        if(!$this->userRepo->checkId($id)){
-            $this->userRepo->destroy($id);
+        if($request->id == $request->session()->get('user_id')){
+            return redirect()->route('admin.user.index')->with(['message' => 'Bạn không thể xóa chính mình !!!']);
+        }
+        if(!$this->userRepo->checkId($request->id)){
+            $this->userRepo->destroy($request->id);
             return redirect()->route('admin.user.index')->with(['message' => 'Đã xóa thành công']);
         }
         return redirect()->route('admin.user.index')->with(['message' => 'Không có User này']);

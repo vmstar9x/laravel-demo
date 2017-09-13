@@ -5,7 +5,8 @@
 @section('Noi Dung')
     <div class="breadLine">
         <ul class="breadcrumb">
-            <li><a href="">List Products</a></li>
+            <li><a href="">List Products</a><span class="divider">></span></li>
+            <li class="active">Edit Product</li>
         </ul>
     </div>
 

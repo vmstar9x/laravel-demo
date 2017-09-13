@@ -6,7 +6,7 @@
     <div class="breadLine">
         <ul class="breadcrumb">
             <li><a href="">List Users</a> <span class="divider">></span></li>
-            <li class="active"></li>
+            <li class="active">Add User</li>
         </ul>
     </div>
 

@@ -6,7 +6,7 @@
     <div class="breadLine">
         <ul class="breadcrumb">
             <li><a href="{{ route('admin.product.index') }}">List Products</a><span class="divider">></span></li>
-            <li class="active">Add Category</li>
+            <li class="active">Add Product</li>
         </ul>
     </div>
 

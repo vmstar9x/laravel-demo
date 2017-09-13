@@ -6,7 +6,7 @@
     <div class="breadLine">
         <ul class="breadcrumb">
             <li><a href="{{ route('admin.user.index') }}">List Users</a> <span class="divider">></span></li>
-            <li class="active"></li>
+            <li class="active">Edit User</li>
         </ul>
     </div>
 

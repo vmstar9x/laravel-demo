@@ -19,8 +19,8 @@ class Product extends Migration
             $table->string('product_price');
             $table->string('product_description');
             $table->integer('product_status');
-            $table->timestamps('product_time_created');
-            $table->timestamps('product_time_updated');
+            $table->timestamps();
+//            $table->timestamps('product_time_updated');
         });
     }
 
