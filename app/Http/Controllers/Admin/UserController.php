@@ -107,6 +107,7 @@ class UserController extends Controller
                 if(File::exists($fileDelete)) {
                     File::delete($fileDelete);
                 }
+                
             }
 
             $img = $request->user_img;
