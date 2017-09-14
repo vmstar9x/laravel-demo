@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -101,11 +102,11 @@ class UserController extends Controller
     public function postEdit(UserStoreRequest $request)
     {
         if(!$this->userRepo->checkId($request->id)){
-
-            if(!$this->userRepo->checkEmail($request->email)) {
-
-                return redirect()->route('admin.user.postEdit', $request->id)->withErrors(['email' => 'Email đã được đăng ký'])->withInput();
-
+            if(isset($request->checkdel)){
+                $fileDelete = 'upload/user/' . $this->userRepo->getById($request->checkdel)['user_img'];
+                if(File::exists($fileDelete)) {
+                    File::delete($fileDelete);
+                }
             }
 
             $img = $request->user_img;

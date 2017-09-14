@@ -57,9 +57,6 @@
                         <div class="row-form">
                             <div class="span3">Upload Avatar:</div>
                             <div class="span9">
-                                <img src="" alt="Old Image" width="50" height="50">
-                                <input type="checkbox" name="checkdel">Delete
-                                <br>
                                 <input type="file" name="user_img">
                                 @foreach ($errors->get('user_img') as $error)
                                     <p id='notifyMessage'>{{ $error }}</p>

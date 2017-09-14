@@ -58,7 +58,7 @@
                             <div class="span3">Upload Avatar:</div>
                             <div class="span9">
                                 <img src="{{ asset('upload/user') }}/{{ $edit['user_img'] }}" alt="Old Image" width="50" height="50">
-                                <input type="checkbox" name="checkdel">Delete
+                                <input type="checkbox" name="checkdel" value="{{ $edit['user_id'] }}">Delete
                                 <br>
                                 <input type="file" name="user_img">
                                 @foreach ($errors->get('user_img') as $error)
